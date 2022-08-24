@@ -1,0 +1,15 @@
+{
+  "name": "transition-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start" : "ts-node-dev src/main.ts"
+  },
+  "dependencies": {
+    "commander": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.7.11"
+  }
+}

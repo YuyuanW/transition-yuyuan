@@ -1,4 +1,5 @@
 import { IncomingMessage } from "http";
+import { appid, code } from "./private.data";
 
 const querystring = require('querystring');
 const https = require('https');
@@ -12,9 +13,7 @@ export const translate = (word:string)=>{
   const q=word
   const from = 'en'
   const to = 'zh'
-  const appid  = '20220508001208209'
   const salt = '1435660288'
-  const code = 'I7Me033g5kN7DjZ9rDnZ'
   const sign = md5(appid+q+salt+code)
   
   const queryList:string = querystring.stringify({ 
@@ -29,7 +28,7 @@ export const translate = (word:string)=>{
 
 
   const req = https.request(options, (res:IncomingMessage) => {
-    console.log('header',res.headers)
+    // console.log('header',res.headers)
     res.on('data', (d) => {
       process.stdout.write(d);
     });

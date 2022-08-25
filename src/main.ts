@@ -54,8 +54,8 @@ export const translate = (word:string)=>{
 
   const req = https.request(options, (res:IncomingMessage) => {
     // console.log('header',res.headers)
-    const arr:any = []
-    res.on('data', (chunk:any) => {
+    const arr:Buffer[] = []
+    res.on('data', (chunk:Buffer) => {
       arr.push(chunk)
       // process.stdout.write(d);
     });

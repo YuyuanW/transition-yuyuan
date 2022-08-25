@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import commander, { args } from 'commander';
 import { translate } from './main';
 const program = new commander.Command();

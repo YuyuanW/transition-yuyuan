@@ -28,7 +28,7 @@ yarn remove transition-yuyuan
 ##### for example
 1. 英译中
 ```ts happy```\
-  output：快乐的\
+  output：快乐的
 2. 中译英
 ```ts 一寸光阴一寸金```\
   output: An inch of time is an inch of gold

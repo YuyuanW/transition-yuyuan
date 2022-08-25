@@ -6,10 +6,38 @@ const https = require('https');
 
 const md5 = require('js-md5');
 
+const errorMap:ErrorMap = {
+  52001:'请求超时',
+  52002:'系统错误',
+  52003:'用户认证失败',
+  54000:'必填参数为空',
+  54001:'签名错误',
+  58000 :'客户端IP非法',
+  unknown : '服务器繁忙'
+}
+
+type ErrorMap = {
+  52001:string,
+  52002:string,
+  52003:string,
+  54000:string,
+  54001:string,
+  58000 :string,
+  unknown : string
+}
+type Map = keyof ErrorMap;
+
+
 export const translate = (word:string)=>{
+  let from = 'en'
+  let to = 'zh'
+  if(/[a-zA-Z]/.test(word)){
+    [from,to] = [from,to]
+  }else{
+    from = [to, to = from][0]
+  }
+
   const q=word
-  const from = 'en'
-  const to = 'zh'
   const salt = '1435660288'
   const sign = md5(appid+q+salt+code)
   
@@ -36,15 +64,17 @@ export const translate = (word:string)=>{
         from : string;
         to :string;
         trans_result : {src:string,dst:string}[];
-        error_code ?: string;
+        error_code ?: Map;
         error_msg?:string;
       }
       const result = Buffer.concat(arr).toString()
       const outputResult:BaiduResult =  JSON.parse(result)
       if(outputResult.error_code){
-        console.error(outputResult.error_code,outputResult.error_msg)
+        console.error( errorMap[outputResult.error_code] || outputResult.error_msg)
+        process.exit(2)
       }else{
         console.log(outputResult.trans_result[0].dst)
+        process.exit(0)
       }
     })
   }); 

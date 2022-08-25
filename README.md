@@ -19,7 +19,7 @@ yarn global add transition-yuyuan
 
 ### uninstall:
 ```
-yarn remove transition-yuyuan
+yarn  remove transition-yuyuan
 ```
 
 ### use:

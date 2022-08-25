@@ -2,9 +2,9 @@
 一个基于node.js和TS的简洁的中译英，英译中的快捷翻译工具
 
 ##  已发布到npm上
-npm的用户名是yuyuanone\
-packagename:transition-yuyuan\
-掘金用户名同GitHub：YuyuanW\
+- npm的用户名是yuyuanone
+- packagename:transition-yuyuan
+- 掘金用户名同GitHub：YuyuanW
 ### install: 
 #### npm
 ```

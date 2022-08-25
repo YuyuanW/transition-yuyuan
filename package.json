@@ -1,16 +1,17 @@
 {
-  "name": "transition-server",
-  "version": "1.0.0",
-  "main": "index.js",
+  "name": "transition-yuyuan",
+  "version": "0.0.1",
+  "main": "dist/main.js",
   "license": "MIT",
+  "bin":{"ts":"dist/cli.js"},
+  "files":["dist/**/*.js"],
   "scripts": {
     "start" : "ts-node-dev src/main.ts"
   },
   "dependencies": {
     "commander": "^4.0.0",
-    "js-md5":"^0.7.3",
-    "iconv-jschardet" : "^2.0.28"
-  },
+    "js-md5":"^0.7.3"
+  },  
   "devDependencies": {
     "@types/node": "^18.7.11"
   }

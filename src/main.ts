@@ -5,11 +5,8 @@ const querystring = require('querystring');
 const https = require('https');
 
 const md5 = require('js-md5');
-const iconv = require('iconv-jschardet');
-// iconv.encode(SarchName, 'gbk');
 
 export const translate = (word:string)=>{
-  console.log('fuck',word)
   const q=word
   const from = 'en'
   const to = 'zh'
@@ -29,17 +26,32 @@ export const translate = (word:string)=>{
 
   const req = https.request(options, (res:IncomingMessage) => {
     // console.log('header',res.headers)
-    res.on('data', (d) => {
-      process.stdout.write(d);
+    const arr:any = []
+    res.on('data', (chunk:any) => {
+      arr.push(chunk)
+      // process.stdout.write(d);
     });
-  });
-  
+    res.on('end',()=>{
+      type BaiduResult = {
+        from : string;
+        to :string;
+        trans_result : {src:string,dst:string}[];
+        error_code ?: string;
+        error_msg?:string;
+      }
+      const result = Buffer.concat(arr).toString()
+      const outputResult:BaiduResult =  JSON.parse(result)
+      if(outputResult.error_code){
+        console.error(outputResult.error_code,outputResult.error_msg)
+      }else{
+        console.log(outputResult.trans_result[0].dst)
+      }
+    })
+  }); 
   req.on('error', (e: any) => {
     console.error(e);
   });
-
   // req.setHeader('Content-type','application/json;charset=gbk')
-
   req.end();
 }
 
